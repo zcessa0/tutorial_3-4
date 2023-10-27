@@ -1,0 +1,29 @@
+# Pandas cheat sheet
+
+| Purpose                                                  | Code                                                                                                                                                      |
+|:---------------------------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Use pandas in a code file                                | `import pandas as pd`                                                                                                                                     |
+| Read CSV                                                 | `df = pd.read('my_data_file.csv')`                                                                                                                        |
+| Write to CSV                                             | `df = pd.tocsv('my_new_data_file.csv')`                                                                                                                   |
+| Read Excel                                               | `df = pd.read_excel('my_data_file.xlsx', 'sheet1')`                                                                                                       |
+| Write to Excel                                           | `df = pd.to_excel('my_new_data_file', sheet_name='sheet1')`                                                                                               |
+| Skip n rows on read                                      | `df = pd.read('my_data_file.csv', skiprows=1)`                                                                                                            | 
+| Number of rows/cols                                      | `df.shape`                                                                                                                                                |
+| Top n rows, Last n rows                                  | `df.head(5)` `df.tail(3)`                                                                                                                                 |
+| Column labels                                            | `df.columns`                                                                                                                                              |
+| Column labels and data types                             | `df.info(verbose=True)`                                                                                                                                   |
+| Drop a named column                                      | `df.drop(['Source for Re-opening'], axis=1)`                                                                                                              |
+| Drop numbered columns                                    | `df.drop(df.columns[[40, 41]], axis=1)`                                                                                                                   |
+| Find missing values                                      | `df.isnull()` and `df.isna()`                                                                                                                             |
+| Drop null values                                         | `df.dropna()`                                                                                                                                             |
+| Replace missing values with `fillna`                     | `df.fillna({'Column A': 0, 'Column B': 99, 'Column C': df['Column C'].mean()})`, `df.fillna(method='ffill', axis=1)`, `df.fillna(value=5)`                |
+| Replace missing values with a particular value e.g. mean | `mean = df['col1'].mean()` then `df['col1'].fillna(mean)`                                                                                                 |
+| Filter rows                                              | Rows where the value in col1 is greater than 10`df[df['col1']>10]`                                                                                        |
+| Find unique values                                       | `df['col1'].unique()`                                                                                                                                     |
+| Number of occurrences of a value                         | `df['col1'].value_counts()`                                                                                                                               |
+| Identify duplicates                                      | `df.duplicated()`                                                                                                                                         |
+| Drop duplicates                                          | `df.drop_duplicates(inplace=True)`, `df.drop_duplicates(subset=['col2'], inplace=True)`, `df.drop_duplicates(subset=['col2'], keep='last', inplace=True)` |
+| Remove blank spaces                                      | `df['col1'].str.strip()`                                                                                                                                  |
+| Merge multiple data frames                               | `pd.merge(df1, df2, on='name_of_common_column', how='outer'` (options for `how=` include left, right and inner)`                                          |
+| Concatenate multiple data frames                         | ```python pd.concat([df1, df2])```                                                                                                                        |
+| Grouping and applying functions to groups                | `df.groupby('column1').sum()`, `df2 = df.groupby(['col1','col2']).count()`                                                                                |
